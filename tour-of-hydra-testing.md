@@ -86,7 +86,8 @@ On my projects, I require 100% code coverage under unit tests.
 Most projects are organized as follows: For each file in `app/` and `lib/`, there will exist a corresponding file in `spec/`. In Atom (via [rails-rspec](https://atom.io/packages/rails-rspec)) and Sublime (via [Rails Go to Spec](http://git.io/vZh2K)) I map `Cmd+.` to jump between live and spec files. This command creates the file if one does not exist.
 
 Unit tests should test a single class and how it collaborates with other objects.
-Collaborators should be injected into either the method you are testing or as part of object instantiation. You will begin to tease apart the interface of various objects.
+I opt to inject collaborators into either the method I am testing or as part of object instantiation.
+This helps me tease apart the interface of various objects.
 
 Use a code style enforcement tool such as [Rubocop](http://git.io/KT2ycw) and HoundCI. Your team should agree on the style guide and stick to it. Any violations should be reviewed and accepted as part of a pull request (with lots of comments).
 
@@ -144,7 +145,11 @@ At the same time, I'm creating outward facing classes that expose an API for pub
 Throughout the unit level refactoring, I often won't run the Acceptance tests; They are too slow.
 However they are useful as they work through the system from the outside.
 
-Acceptance tests that I run will leverage [Capybara](http://git.io/wuHj-Q) to handle the web requests. I will also take the time to make Page objects via [SitePrism](http://git.io/LY5ARA). Page objects allow.
+Acceptance tests that I run will leverage [Capybara](http://git.io/wuHj-Q) to handle the web requests.
+I will also take the time to make Page objects via [SitePrism](http://git.io/LY5ARA).
+Page objects allow for encapsulation of intent.
+Without a page object in Capybara, you click and verify the content of lots of CSS selectors.
+Using page objects, you can give each of those elements a meaningful name.
 
 With Acceptance tests, you will need to construct the state of your application. One mechanism is to use FactoryGirl; This provides a litany of methods for persisting data in a repeatable manner. As a warning, if a single FactoryGirl method is creating multiple objects you may have an object that should be moved into your application logic.
 
